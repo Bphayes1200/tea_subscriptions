@@ -1,7 +1,7 @@
 class Api::V1::TeaSubscriptionsController < ApplicationController
   def index
     customer = Customer.find(params[:customer_id])
-    render json: SubscriptionSerializer.new(customer.tea_subscriptions)
+    render json: SubscriptionSerializer.new(customer.subscriptions)
   end
 
   def update

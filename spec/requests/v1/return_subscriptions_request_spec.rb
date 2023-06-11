@@ -3,8 +3,9 @@ require "rails_helper"
 RSpec.describe "All subscriptions request" do 
   before :each do 
     @customer = create(:customer, id: 1)
-    @subscription_1 = create(:tea_subscription, active: true, customer_id: @customer.id)
-    @subscription_12 = create(:tea_subscription, active: false, customer_id: @customer.id)
+    @tea = create(:tea)
+    @subscription_1 = create(:subscription, active: true, customer_id: @customer.id, tea_id: @tea.id)
+    @subscription_2 = create(:subscription, active: false, customer_id: @customer.id, tea_id: @tea.id)
   end
   it "will return a list of all of a customers subscriptions, active or not" do 
     get "/api/v1/customers/#{@customer.id}/tea_subscriptions"

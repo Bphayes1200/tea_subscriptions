@@ -10,20 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_06_212122) do
+ActiveRecord::Schema.define(version: 2023_06_11_193756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "customers", force: :cascade do |t|
-    t.string "name"
-  end
-
-  create_table "tea_subscriptions", force: :cascade do |t|
-    t.boolean "active"
+  create_table "customer_teas", force: :cascade do |t|
     t.bigint "customer_id"
-    t.index ["customer_id"], name: "index_tea_subscriptions_on_customer_id"
+    t.bigint "tea_id"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_teas_on_customer_id"
+    t.index ["tea_id"], name: "index_customer_teas_on_tea_id"
   end
 
-  add_foreign_key "tea_subscriptions", "customers"
+  create_table "customers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teas", force: :cascade do |t|
+    t.string "name"
+    t.integer "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "customer_teas", "customers"
+  add_foreign_key "customer_teas", "teas"
 end

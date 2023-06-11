@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Customer, type: :model do 
+RSpec.describe Tea do 
   describe "relationships" do 
     it { should have_many :customer_teas }
   end

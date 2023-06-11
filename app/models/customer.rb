@@ -1,3 +1,3 @@
 class Customer < ApplicationRecord
-  has_many :tea_subscriptions
+  has_many :customer_teas
 end

@@ -15,7 +15,7 @@ RSpec.describe "Update subscription status" do
 
     patch "/api/v1/tea_subscriptions/#{@subscription_2.id}", headers: headers, params: JSON.generate({tea_subscription: subscription_params})
     
-    subscription = TeaSubscription.find(@subscription_2.id)
+    subscription = Subscription.find(@subscription_2.id)
 
     expect(subscription.active).to eq(true)
   end
@@ -27,7 +27,7 @@ RSpec.describe "Update subscription status" do
 
     patch "/api/v1/tea_subscriptions/#{@subscription_1.id}", headers: headers, params: JSON.generate({tea_subscription: subscription_params})
     
-    subscription = TeaSubscription.find(@subscription_1.id)
+    subscription = Subscription.find(@subscription_1.id)
 
     expect(subscription.active).to eq(false)
   end

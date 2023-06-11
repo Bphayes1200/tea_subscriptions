@@ -5,7 +5,7 @@ class Api::V1::TeaSubscriptionsController < ApplicationController
   end
 
   def update
-    subscription = TeaSubscription.find(params[:id])
+    subscription = Subscription.find(params[:id])
     subscription.update(subscription_params)
     render json: SubscriptionSerializer.new(subscription)
   end

@@ -13,7 +13,7 @@ RSpec.describe "Update subscription status" do
     headers = {"CONTENT_TYPE" => "application/json"}
     subscription_params = {active: true}
 
-    patch "/api/v1/tea_subscriptions/#{@subscription_2.id}", headers: headers, params: JSON.generate({tea_subscription: subscription_params})
+    patch "/api/v1/tea_subscriptions/#{@subscription_2.id}", headers: headers, params: JSON.generate({subscription: subscription_params})
     
     subscription = Subscription.find(@subscription_2.id)
 
@@ -25,7 +25,7 @@ RSpec.describe "Update subscription status" do
     headers = {"CONTENT_TYPE" => "application/json"}
     subscription_params = {active: false}
 
-    patch "/api/v1/tea_subscriptions/#{@subscription_1.id}", headers: headers, params: JSON.generate({tea_subscription: subscription_params})
+    patch "/api/v1/tea_subscriptions/#{@subscription_1.id}", headers: headers, params: JSON.generate({subscription: subscription_params})
     
     subscription = Subscription.find(@subscription_1.id)
 

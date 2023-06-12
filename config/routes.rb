@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         resources :tea_subscriptions, only: [:index]
       end 
 
-      resources :tea_subscriptions, only: [:update]
+      resources :tea_subscriptions, only: [:update, :create]
     end
   end
 end

@@ -10,8 +10,16 @@ class Api::V1::TeaSubscriptionsController < ApplicationController
     render json: SubscriptionSerializer.new(subscription)
   end
 
+  def create 
+    subscription = Subscription.new(subscription_params)
+    if subscription.save
+      render json: SubscriptionSerializer.new(subscription)
+    else 
+      "error"
+    end
+  end
 private
   def subscription_params
-    params.require(:tea_subscription).permit(:active)
+    params.require(:subscription).permit(:active, :price, :customer_id, :tea_id)
   end
 end

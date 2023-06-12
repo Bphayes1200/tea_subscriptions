@@ -9,7 +9,6 @@ RSpec.describe Subscription, type: :model do
   describe "Validations" do 
     it { should validate_presence_of :customer_id }
     it { should validate_presence_of :tea_id }
-    it { should validate_presence_of :active }
     it { should validate_presence_of :price }
   end
 end

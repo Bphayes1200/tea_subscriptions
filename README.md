@@ -1,24 +1,86 @@
-# README
+# Tea Subscriptions
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Tea Subscriptions is an internal api that allows consumers to create tea subscriptions for customers with different tea options. 
+<br>
 
-Things you may want to cover:
+### Endpoints
+<br>
 
-* Ruby version
+### 1. Create a Subscription
 
-* System dependencies
+<br>
 
-* Configuration
+*Note:* pass `price`, `active`, `customer_id`, & `tea_id` in request body. `active` is a boolean value
 
-* Database creation
+```bash 
+POST '/api/v1/subscriptions'
+```
 
-* Database initialization
+Response
+```bash
+{
+    "data": {
+        "id": "ID",
+        "type": "subscription",
+        "attributes": {
+            "active": "ACTIVE_STATUS",
+            "tea_id": "TEA_ID",
+            "customer_id": "CUSTOMER_ID"
+        }
+    }
+}
+```
 
-* How to run the test suite
+<br>
 
-* Services (job queues, cache servers, search engines, etc.)
+### 2. Cancel a Subscription
 
-* Deployment instructions
+<br>
 
-* ...
+*Note:* pass `"active": false` in request body. `active` is a boolean value
+
+```bash 
+Patch '/api/v1/subscriptions/{subscription_id}'
+```
+
+Response
+```bash
+{
+    "data": {
+        "id": "ID",
+        "type": "subscription",
+        "attributes": {
+            "active": "ACTIVE_STATUS",
+            "tea_id": "TEA_ID",
+            "customer_id": "CUSTOMER_ID"
+        }
+    }
+}
+```
+
+<br>
+
+### 3. Retrieve all of a customer's subscriptions (active or canceled)
+
+<br>
+
+```bash 
+GET '/api/v1/customers/{customer_id}/subscriptions'
+```
+
+Response
+```bash
+{
+    "data": [
+        {
+            "id": "ID",
+            "type": "subscription",
+            "attributes": {
+                "active": "ACTIVE_STATUS",
+                "tea_id": "TEA_ID",
+                "customer_id": "CUSTOMER_ID"
+            }
+        }
+    ]
+}
+```

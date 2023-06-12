@@ -13,7 +13,7 @@ RSpec.describe "Update subscription status" do
     headers = {"CONTENT_TYPE" => "application/json"}
     subscription_params = {active: true}
 
-    patch "/api/v1/tea_subscriptions/#{@subscription_2.id}", headers: headers, params: JSON.generate({subscription: subscription_params})
+    patch "/api/v1/subscriptions/#{@subscription_2.id}", headers: headers, params: JSON.generate({subscription: subscription_params})
     
     subscription = Subscription.find(@subscription_2.id)
 
@@ -25,10 +25,21 @@ RSpec.describe "Update subscription status" do
     headers = {"CONTENT_TYPE" => "application/json"}
     subscription_params = {active: false}
 
-    patch "/api/v1/tea_subscriptions/#{@subscription_1.id}", headers: headers, params: JSON.generate({subscription: subscription_params})
+    patch "/api/v1/subscriptions/#{@subscription_1.id}", headers: headers, params: JSON.generate({subscription: subscription_params})
     
     subscription = Subscription.find(@subscription_1.id)
 
     expect(subscription.active).to eq(false)
+  end
+
+  it "will return an error if subscription is not found" do 
+    headers = {"CONTENT_TYPE" => "application/json"}
+    subscription_params = {active: false}
+
+    patch "/api/v1/subscriptions/1", headers: headers, params: JSON.generate({subscription: subscription_params})
+    
+    subscriptions = JSON.parse(response.body, symbolize_names: true)
+    
+    expect(subscriptions[:errors]).to eq("Couldn't find Subscription with 'id'=1")
   end
 end

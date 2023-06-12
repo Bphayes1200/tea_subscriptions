@@ -1,4 +1,4 @@
-class Api::V1::TeaSubscriptionsController < ApplicationController
+class Api::V1::SubscriptionsController < ApplicationController
   def index
     customer = Customer.find(params[:customer_id])
     render json: SubscriptionSerializer.new(customer.subscriptions)
@@ -12,11 +12,8 @@ class Api::V1::TeaSubscriptionsController < ApplicationController
 
   def create 
     subscription = Subscription.new(subscription_params)
-    if subscription.save
-      render json: SubscriptionSerializer.new(subscription)
-    else 
-      "error"
-    end
+    subscription.save!
+    render json: SubscriptionSerializer.new(subscription)
   end
 private
   def subscription_params
